@@ -1,6 +1,7 @@
 import Camera from "./Utils/Camera";
 import Sizes from "./Utils/Sizes";
 import Time from "./Utils/Time";
+import Renderer from "./Utils/Renderer";
 import * as THREE from "three";
 
 let instance = null;
@@ -29,6 +30,7 @@ export default class Experience {
     //2-passare il parametro globale al constructor di camera: new Camera(this) ((troppi passaggi))
     //3-Singleton class ((cleanest way)) che usiamo qui, instance ⬆️
     this.camera = new Camera();
+    this.renderer = new Renderer();
 
     //Sizes
     //Ascolta la chiamata resize derivata dal Sizes Class
@@ -46,9 +48,11 @@ export default class Experience {
 
   resize() {
     this.camera.resize();
+    this.renderer.resize();
   }
 
   update() {
     this.camera.update();
+    this.renderer.update();
   }
 }
