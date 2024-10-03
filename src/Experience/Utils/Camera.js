@@ -12,6 +12,7 @@ export default class Camera {
     //creare un instance chiamando la func ⬇️
     this.setInstance();
     this.setOrbitControls();
+    this.resize();
   }
 
   //Creare un prespectiveCamera e salvarlo come un istance property
@@ -29,5 +30,13 @@ export default class Camera {
   setOrbitControls() {
     this.controls = new OrbitControls(this.instance, this.canvas);
     this.controls.enableDamping = true;
+  }
+  //
+  resize() {
+    this.instance.aspect = this.sizes.width / this.sizes.height;
+    this.instance.updateProjectionMatrix();
+  }
+  update() {
+    this.controls.update();
   }
 }
