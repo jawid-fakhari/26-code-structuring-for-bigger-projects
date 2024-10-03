@@ -2,6 +2,7 @@ import Camera from "./Utils/Camera";
 import Sizes from "./Utils/Sizes";
 import Time from "./Utils/Time";
 import Renderer from "./Utils/Renderer";
+import World from "./World/World";
 import * as THREE from "three";
 
 let instance = null;
@@ -31,6 +32,7 @@ export default class Experience {
     //3-Singleton class ((cleanest way)) che usiamo qui, instance ⬆️
     this.camera = new Camera();
     this.renderer = new Renderer();
+    this.world = new World();
 
     //Sizes
     //Ascolta la chiamata resize derivata dal Sizes Class

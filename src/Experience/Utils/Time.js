@@ -10,7 +10,7 @@ export default class Time extends EventEmitter {
     this.elapsed = 0;
     this.delta = 16; //why 16? default screens run at 16fps
 
-    // this.tick(); // non chiamo direttamente ma invece ↙️, cosi aspettiamo 1 frame
+    // this.tick(); //Non chiamo direttamente ma invece ↙️, cosi aspettiamo 1 frame
     window.requestAnimationFrame(() => {
       this.tick();
     });
