@@ -43,7 +43,7 @@ export default class Experience {
 
     //Time
     //Time tick event
-    this.time.on("trigger", () => {
+    this.time.on("tick", () => {
       this.update(); //(⬇️)=>{}
     });
   }
