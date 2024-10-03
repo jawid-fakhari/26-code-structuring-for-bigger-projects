@@ -1,5 +1,10 @@
-export default class Sizes {
-  constructor(parameters) {
+import EventEmitter from "./EventEmitter";
+
+export default class Sizes extends EventEmitter {
+  constructor() {
+    //quando un classe si estende l'altro con super chiamiamo il constructor del classe madre
+    super();
+
     //Setup
     this.width = window.innerWidth;
     this.height = window.innerHeight;
@@ -10,6 +15,9 @@ export default class Sizes {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
       this.pixelRatio = Math.min(window.devicePixelRatio, 2);
+
+      //il metodo trigger che deriva dal EventEmitter class, chiama resize e quindi viene ascoltato nel Experience class
+      this.trigger("resize");
     });
   }
 }

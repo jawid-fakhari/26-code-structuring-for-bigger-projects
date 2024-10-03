@@ -10,5 +10,10 @@ export default class Experience {
 
     //Setup
     this.sizes = new Sizes();
+
+    //Ascolta la chiamata resize derivata dal Sizes Class
+    this.sizes.on("resize", () => {
+      console.log("I heard a resize");
+    });
   }
 }
