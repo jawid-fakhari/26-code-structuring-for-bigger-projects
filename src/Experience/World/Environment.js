@@ -27,5 +27,21 @@ export default class Environment {
     this.environmentMap.texture.colorSpace = THREE.SRGBColorSpace;
 
     this.scene.environment = this.environmentMap.texture;
+
+    //aggiungere un updateMaterials al environmentMap, perchè nel world prima viene caricato mesh poi environment, che quando andiamo online ci creerà dei problemi
+    this.setEnvironmentMap.updateMaterials = () => {
+      //traverse method is basically the iterator through your loaded object. You can pass the function to the traverse() function which will be called for every child of the object being traversed. If you call traverse() on scene. you traverse through the complete scene graph.
+      this.scene.traverse((child) => {
+        if (
+          child instanceof THREE.Mesh &&
+          child.material instanceof THREE.MeshStandardMaterial
+        ) {
+          child.material.envMap = this.environmentMap.texture;
+          child.material.envMapIntensity = this.environmentMap.intensity;
+          child.material.needsUpdate = true;
+        }
+      });
+    };
+    this.setEnvironmentMap.updateMaterials();
   }
 }
