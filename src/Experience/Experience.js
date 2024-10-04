@@ -1,9 +1,13 @@
+import * as THREE from "three";
 import Camera from "./Utils/Camera";
 import Sizes from "./Utils/Sizes";
 import Time from "./Utils/Time";
 import Renderer from "./Utils/Renderer";
 import World from "./World/World";
-import * as THREE from "three";
+import Resources from "./Utils/Resources.js";
+import sources from "./sources.js";
+
+console.log(sources);
 
 let instance = null;
 
@@ -26,6 +30,8 @@ export default class Experience {
     this.sizes = new Sizes();
     this.time = new Time();
     this.scene = new THREE.Scene();
+    //init resources, passare sources dentro
+    this.resources = new Resources(sources);
     //Ci sono 3 metodi per chiamare la camera:
     //1-globale usande window.experience in classe Camera.js ((non pulito))
     //2-passare il parametro globale al constructor di camera: new Camera(this) ((troppi passaggi))
