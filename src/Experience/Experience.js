@@ -7,8 +7,6 @@ import World from "./World/World";
 import Resources from "./Utils/Resources.js";
 import sources from "./sources.js";
 
-console.log(sources);
-
 let instance = null;
 
 export default class Experience {
