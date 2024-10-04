@@ -8,6 +8,7 @@ export default class Environment {
 
     this.setSunLight();
   }
+  //Sunlight
   setSunLight() {
     this.sunLight = new THREE.DirectionalLight("#ffffff", 4);
     this.sunLight.castShadow = true;
