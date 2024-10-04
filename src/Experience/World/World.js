@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import Experience from "../Experience.js";
 import Environment from "./Environment.js";
+import Floor from "./Floor.js";
 
 export default class World {
   constructor() {
@@ -18,6 +19,7 @@ export default class World {
     //Recuperare resources e ascoltare ready event poi inistantiating Enviroment
     this.resources.on("ready", () => {
       //Setup
+      const floor = new Floor(); // floor deve essere pirma di environment altrimenti non prender la luce del dichiarato per il sole
       this.environment = new Environment();
     });
   }
