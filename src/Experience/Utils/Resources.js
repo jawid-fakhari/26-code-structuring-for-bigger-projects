@@ -27,23 +27,6 @@ export default class Resources extends EventEmitter {
   startLoading() {
     //Loop through the this.sources array and load them by using corresponded loader
     for (const source of this.sources) {
-      // switch (source.type) {
-      //   case "gltfModel":
-      //     this.loaders.gltfLoader.load(source.path, (file) => {
-      //       this.sourceLoaded(source, file);
-      //     });
-      //     break;
-      //   case "texture":
-      //     this.loaders.gltfLoader.load(source.path, (file) => {
-      //       this.sourceLoaded(source, file);
-      //     });
-      //     break;
-      //   case "cubeTexture":
-      //     this.loaders.gltfLoader.load(source.path, (file) => {
-      //       this.sourceLoaded(source, file);
-      //     });
-      //     break;
-      // }
       if (source.type === "gltfModel") {
         this.loaders.gltfLoader.load(source.path, (file) => {
           this.sourceLoaded(source, file);
@@ -64,7 +47,7 @@ export default class Resources extends EventEmitter {
     this.items[source.name] = file;
 
     this.loaded++;
-    //quando loaded arriva alla largheza del toLoad chiama trigger ready
+    //quando loaded arriva alla largheza del toLoad chiama trigger ready e nel world lo ascolto
     if (this.loaded === this.toLoad) {
       this.trigger("ready");
     }
