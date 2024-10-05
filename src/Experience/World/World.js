@@ -1,7 +1,7 @@
-import * as THREE from "three";
 import Experience from "../Experience.js";
 import Environment from "./Environment.js";
 import Floor from "./Floor.js";
+import Fox from "./Fox.js";
 
 export default class World {
   constructor() {
@@ -9,17 +9,11 @@ export default class World {
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
 
-    //Test mesh
-    const testMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(1, 1, 1),
-      new THREE.MeshStandardMaterial()
-    );
-    this.scene.add(testMesh);
-
     //Recuperare resources e ascoltare ready event poi inistantiating Enviroment
     this.resources.on("ready", () => {
       //Setup
-      const floor = new Floor(); // floor deve essere pirma di environment altrimenti non prender la luce del dichiarato per il sole
+      this.floor = new Floor(); // floor deve essere pirma di environment altrimenti non prender la luce del dichiarato per il sole
+      this.fox = new Fox();
       this.environment = new Environment();
     });
   }
