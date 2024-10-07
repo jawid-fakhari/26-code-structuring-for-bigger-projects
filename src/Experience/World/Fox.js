@@ -33,7 +33,7 @@ export default class Fox {
     //Animation mixer è il player di animation su un'ogg. specifico
     this.animation.mixer = new THREE.AnimationMixer(this.model);
     this.animation.action = this.animation.mixer.clipAction(
-      this.resource.animations[2]
+      this.resource.animations[0]
     );
     this.animation.action.play();
   }
