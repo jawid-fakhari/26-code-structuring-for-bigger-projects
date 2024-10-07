@@ -6,6 +6,11 @@ export default class Environment {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
+    this.debug = this.experience.debug;
+
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder("environment");
+    }
 
     this.setSunLight();
     this.setEnvironmentMap();
@@ -19,7 +24,39 @@ export default class Environment {
     this.sunLight.shadow.normalBias = 0.05;
     this.sunLight.position.set(3, 3, -2.25);
     this.scene.add(this.sunLight);
+
+    if (this.debug.active) {
+      this.debugFolder
+        .add(this.sunLight, "intensity")
+        .name("sunLightIntensity")
+        .min(0)
+        .max(10)
+        .step(0.001);
+
+      this.debugFolder
+        .add(this.sunLight.position, "x")
+        .name("sunLightX")
+        .min(-5)
+        .max(10)
+        .step(0.001);
+
+      this.debugFolder
+        .add(this.sunLight.position, "y")
+        .name("sunLightY")
+        .min(-5)
+        .max(10)
+        .step(0.001);
+
+      this.debugFolder
+        .add(this.sunLight.position, "z")
+        .name("sunLightZ")
+        .min(-5)
+        .max(10)
+        .step(0.001);
+    }
   }
+
+  //Environment map
   setEnvironmentMap() {
     this.environmentMap = {};
     this.environmentMap.intensity = 0.4;
@@ -29,7 +66,7 @@ export default class Environment {
     this.scene.environment = this.environmentMap.texture;
 
     //aggiungere un updateMaterials al environmentMap, perchè nel world prima viene caricato mesh poi environment, che quando andiamo online ci creerà dei problemi
-    this.setEnvironmentMap.updateMaterials = () => {
+    this.environmentMap.updateMaterials = () => {
       //traverse method is basically the iterator through your loaded object. You can pass the function to the traverse() function which will be called for every child of the object being traversed. If you call traverse() on scene. you traverse through the complete scene graph.
       this.scene.traverse((child) => {
         if (
@@ -42,6 +79,17 @@ export default class Environment {
         }
       });
     };
-    this.setEnvironmentMap.updateMaterials();
+    this.environmentMap.updateMaterials();
+
+    //Debug
+    if (this.debug.active) {
+      this.debugFolder
+        .add(this.environmentMap, "intensity")
+        .name("envMapIntensity")
+        .min(0)
+        .max(4)
+        .step(0.001)
+        .onChange(this.environmentMap.updateMaterials);
+    }
   }
 }
