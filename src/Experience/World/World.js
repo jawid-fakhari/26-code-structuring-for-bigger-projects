@@ -12,9 +12,13 @@ export default class World {
     //Recuperare resources e ascoltare ready event poi inistantiating Enviroment
     this.resources.on("ready", () => {
       //Setup
-      this.floor = new Floor(); // floor deve essere pirma di environment altrimenti non prender la luce del dichiarato per il sole
+      // floor & fox deve essere pirma di environment altrimenti non prender la luce del dichiarato per il sole
+      this.floor = new Floor();
       this.fox = new Fox();
       this.environment = new Environment();
     });
+  }
+  update() {
+    if (this.fox) this.fox.update();
   }
 }
