@@ -65,6 +65,7 @@ export default class Experience {
     this.renderer.update();
   }
 
+  //destroy method deve essere fatto per ogni classe, qui abbiamo fatto cosi. ma in realta si fa per ogni classe
   destroy() {
     this.sizes.off("resize");
     this.time.off("tick");
